@@ -1,10 +1,9 @@
 name: Test and Deploy
 
-# GitHub Actionsをトリガーする条件
 on:
   push:
     branches:
-      - main  # メインブランチへのプッシュ時に実行
+      - main
 
 jobs:
   test:
@@ -17,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '18.18.0'  # Node.js v18.18.0を指定
 
       - name: Install dependencies
         run: npm install
@@ -27,7 +26,7 @@ jobs:
 
   build_and_deploy:
     runs-on: ubuntu-latest
-    needs: test  # テストが成功したらビルドとデプロイを実行
+    needs: test
 
     steps:
       - name: Check out the repository
@@ -36,7 +35,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '18.18.0'  # 同様にNode.js v18.18.0を指定
 
       - name: Install dependencies
         run: npm install
